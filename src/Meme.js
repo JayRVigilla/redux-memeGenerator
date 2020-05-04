@@ -1,34 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-function Meme({topText, bottomText, imgURL}){
 
-  return(
+function Meme({ meme: { topText, bottomText, imgURL, id } }) {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch({ type: "DELTE_MEME", payload: id })
+  }
+
+  return (
     <li>
-      <p>{topText}</p>
-      <img src={imgURL}></img>
-  <p>{bottomText}</p>
+      <p className="topText">{topText}</p>
+      <img className="memeImage" src={imgURL} alt={`from ${imgURL}`} />
+      <p className="bottomText">{bottomText}</p>
+      <button onClick={handleDelete}>Delete</button>
     </li>
   )
 }
 
-default export Meme;
-
-
-
-
-// for memelist
-<ul>
-  memelist.map(meme => id=> <Meme/...key={meme.id})
-</ul>
-
-
-// const renderBoxes = () => {
-//   return (
-//     <div>
-//       {boxes.map(box => (
-//         <div>
-//           <Box key={box.id} id={box.id} backgroundColor={box.backgroundColor} width={box.width} height={box.height} remove={remove} />
-//         </div>
-//       ))}
-//     </div>
-//   );
+export default Meme;
